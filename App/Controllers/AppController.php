@@ -25,12 +25,30 @@
 			header('location: /timeline');
 		}
 
+		public function quemSeguir() {
+			$this->validaAutenticacao();
+
+			$pesquisarPor = isset($_GET['pesquisarPor']) ? $_GET['pesquisarPor'] : '';
+
+			$usuarios = array();
+
+			if($pesquisarPor != '') {
+				$usuario =  Container::getModel('Usuario');
+				$usuario->__set('nome', $pesquisarPor);
+				$usuarios = $usuario->getAll();
+			}
+
+			$this->view->usuarios = $usuarios;
+
+			$this->render('quemSeguir');
+		} 
+
 		public function validaAutenticacao() {
 			session_start();
 
 			if(!isset($_SESSION['id']) || $_SESSION['id'] == '' || !isset($_SESSION['nome']) || $_SESSION['nome'] == '') {
 				header('location: /');
 			}
-		} 
+		}
 	}
 ?>
