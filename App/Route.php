@@ -52,6 +52,12 @@
 				'action' => 'quemSeguir'
 			);
 
+			$routes['acao'] = array (
+				'route' => '/acao',
+				'controller' => 'AppController',
+				'action' => 'acao'
+			);
+
 			$this->setRoutes($routes);
 		}
 	}
