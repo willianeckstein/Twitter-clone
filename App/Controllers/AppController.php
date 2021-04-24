@@ -17,10 +17,19 @@
 		public function tweet() {
 			$this->validaAutenticacao();
 
-			$tweet = Container::getModel('tweet');
-			$tweet->__set('tweet', $_POST['tweet']);
-			$tweet->__set('id_usuario', $_SESSION['id']);
-			$tweet->salvar();
+			$acao = isset($_GET['acao']) ? $_GET['acao'] : '';
+
+			if($acao == "deletar") {
+				$tweet = Container::getModel('tweet');
+				$tweet->__set('id', $_GET['id']);
+				$tweet->deletar();
+			} else {
+				$tweet = Container::getModel('tweet');
+				$tweet->__set('tweet', $_POST['tweet']);
+				$tweet->__set('id_usuario', $_SESSION['id']);
+				$tweet->salvar();
+			}
+			
 
 			header('location: /timeline');
 		}

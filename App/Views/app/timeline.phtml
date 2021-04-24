@@ -58,7 +58,7 @@
 		<div class="col-md-6">
 			<div class="row mb-2">
 				<div class="col tweetBox">
-					<form method="post" action="/tweet">
+					<form method="post" action="/tweet?acao=twittar">
 						<textarea class="form-control" name="tweet" id="exampleFormControlTextarea1" rows="3"></textarea>
 						
 						<div class="col mt-2 d-flex justify-content-end">
@@ -76,11 +76,13 @@
 						<p><?= $tweet['tweet'] ?></p>
 
 						<br />
-						<form>
-							<div class="col d-flex justify-content-end">
-								<button type="submit" class="btn btn-danger"><small>Remover</small></button>
-							</div>
-						</form>
+						<?php if ($tweet['id_usuario'] == $_SESSION['id']) { ?>
+							<form>
+								<div class="col d-flex justify-content-end">
+									<a href="/tweet?acao=deletar&id=<?= $tweet['id'] ?>" class="btn btn-danger"><small>Remover</small></a>
+								</div>
+							</form>
+						<?php } ?>
 					</div>
 				</div>
 			<?php } ?>	
